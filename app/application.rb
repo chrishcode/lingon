@@ -1,7 +1,5 @@
 require "opal"
 require "opal-jquery"
+require 'components/welcome'
 
-puts "You are running Lingon!"
-Element.find('#p').on :click do
-  puts "The paragraph was clicked!"
-end
+Welcome.new.render
