@@ -1,17 +1,25 @@
 class Welcome
     def render()
         @state = {
-            'msg' => 'Welcome! You are running Lingon!',
+            'msg' => 'You are running Lingon!',
         }
 
-        component = Element.parse '
-            <p class="text-4xl font-light text-red-400">It works! Click me!</p>
+        text = Element.parse '
+            <p class="text-gray-500"></p>
         '
 
-        component.on :click do
-            component.text(@state['msg'])
+        input = Element.parse '
+            <input type="text" id="msg" name="msg" placeholder="Type in here..." class="bg-gray-100 w-64 py-2 px-4 rounded mt-4 text-gray-500 focus:outline-none">
+        '
+
+        text.text(@state['msg'])
+
+        input.on :keyup do
+            @state['msg'] = Element["#msg"].value
+            text.text(@state['msg'])
         end
 
-        component.appendTo('body')
+        text.appendTo('body')
+        input.appendTo('body')
     end
 end
